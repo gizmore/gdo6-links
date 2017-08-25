@@ -1,6 +1,6 @@
 <?php
 return array(
-'link_links' => 'Link Collection',
+'link_links' => '%d Links',
     #####
 'list_title_links_overview' => '[%s] %s Links',
 ####
