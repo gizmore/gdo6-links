@@ -38,6 +38,10 @@ final class Module_Links extends Module
 	public function cfgVotesBeforeOutcome() { return $this->getConfigValue('link_votes_outcome'); }
 	public function cfgAllowed(User $user)
 	{
+	    if ($user->isAdmin())
+	    {
+	        return 9001;
+	    }
 		$added = Link::table()->countWhere("link_created_by = {$user->getID()} AND link_deleted_at IS NULL");
 		$bonus = $this->cfgAddPerLevel() > 0 ? round(max(0, ($user->getLevel() - $this->cfgAddMinLevel()) / $this->cfgAddPerLevel())) : 0;
 		return max(0, $this->cfgAddMin() + $bonus - $added);
