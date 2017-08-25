@@ -9,6 +9,7 @@ use GDO\Links\Link;
 use GDO\Links\Module_Links;
 use GDO\User\User;
 use GDO\Tag\GDO_Tag;
+use GDO\Tag\GDO_Tags;
 
 final class Add extends MethodForm
 {
@@ -29,7 +30,7 @@ final class Add extends MethodForm
 		$table = $this->table;
 		$module = Module_Links::instance();
 
-		$form->addField(GDO_Tag::make('tags'));
+		$form->addField(GDO_Tags::make('tags'));
 		$form->addField($table->gdoColumn('link_lang'));
 		$form->addField($table->gdoColumn('link_title'));
 		$form->addField($table->gdoColumn('link_url'));
@@ -63,7 +64,6 @@ final class Add extends MethodForm
 	public function formValidated(GDO_Form $form)
 	{
 		$link = Link::blank()->setVars($form->getFormData())->insert();
-		
 		$link->updateTags($form->getField('tags')->getValue());
 		
 		return $this->message('msg_link_added')->add($this->execMethod('Overview'));
