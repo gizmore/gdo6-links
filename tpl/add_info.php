@@ -1,7 +1,7 @@
 <?php
 use GDO\Links\Link;
 use GDO\Links\Module_Links;
-use GDO\Template\GDO_Box;
+use GDO\Template\GDT_Box;
 use GDO\User\User;
 
 $module = Module_Links::instance();
@@ -20,4 +20,4 @@ $info = array(
 	$user->getLevel(),
 	$module->cfgAllowed($user),
 );
-echo GDO_Box::make()->html(t('box_content_links_add', $info))->renderCell();
+echo GDT_Box::make()->html(t('box_content_links_add', $info))->renderCell();

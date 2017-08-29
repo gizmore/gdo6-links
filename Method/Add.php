@@ -1,15 +1,15 @@
 <?php
 namespace GDO\Links\Method;
 
-use GDO\Form\GDO_AntiCSRF;
-use GDO\Form\GDO_Form;
-use GDO\Form\GDO_Submit;
+use GDO\Form\GDT_AntiCSRF;
+use GDO\Form\GDT_Form;
+use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
 use GDO\Links\Link;
 use GDO\Links\Module_Links;
 use GDO\User\User;
-use GDO\Tag\GDO_Tag;
-use GDO\Tag\GDO_Tags;
+use GDO\Tag\GDT_Tag;
+use GDO\Tag\GDT_Tags;
 
 final class Add extends MethodForm
 {
@@ -25,12 +25,12 @@ final class Add extends MethodForm
 		$this->table = Link::table();
 	}
 	
-	public function createForm(GDO_Form $form)
+	public function createForm(GDT_Form $form)
 	{
 		$table = $this->table;
 		$module = Module_Links::instance();
 
-		$form->addField(GDO_Tags::make('tags'));
+		$form->addField(GDT_Tags::make('tags'));
 		$form->addField($table->gdoColumn('link_lang'));
 		$form->addField($table->gdoColumn('link_title'));
 		$form->addField($table->gdoColumn('link_url'));
@@ -42,8 +42,8 @@ final class Add extends MethodForm
 		{
 			$form->addField($table->gdoColumn('link_level'));
 		}
-		$form->addField(GDO_Submit::make());
-		$form->addField(GDO_AntiCSRF::make());
+		$form->addField(GDT_Submit::make());
+		$form->addField(GDT_AntiCSRF::make());
 	}
 	
 	public function execute()
@@ -61,7 +61,7 @@ final class Add extends MethodForm
 		return $this->templatePHP('add_info.php');
 	}
 	
-	public function formValidated(GDO_Form $form)
+	public function formValidated(GDT_Form $form)
 	{
 		$link = Link::blank()->setVars($form->getFormData())->insert();
 		$link->updateTags($form->getField('tags')->getValue());

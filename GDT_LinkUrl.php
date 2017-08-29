@@ -1,10 +1,10 @@
 <?php
 namespace GDO\Links;
 
-use GDO\Net\GDO_Url;
-use GDO\Template\GDO_Template;
+use GDO\Net\GDT_Url;
+use GDO\Template\GDT_Template;
 
-final class GDO_LinkUrl extends GDO_Url
+final class GDT_LinkUrl extends GDT_Url
 {
 	public function __construct()
 	{
@@ -20,6 +20,6 @@ final class GDO_LinkUrl extends GDO_Url
 	
 	public function renderCell()
 	{
-		return GDO_Template::php('Links', 'cell_link_url.php', ['link'=>$this->gdo, 'field'=>$this])->__toString();
+		return GDT_Template::php('Links', 'cell_link_url.php', ['link'=>$this->gdo, 'field'=>$this])->__toString();
 	}
 }

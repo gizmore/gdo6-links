@@ -1,10 +1,10 @@
 <?php
 namespace GDO\Links;
 
-use GDO\Template\GDO_Template;
-use GDO\Type\GDO_String;
+use GDO\Template\GDT_Template;
+use GDO\Type\GDT_String;
 
-final class GDO_LinkTitle extends GDO_String
+final class GDT_LinkTitle extends GDT_String
 {
 	public function __construct()
 	{
@@ -20,6 +20,6 @@ final class GDO_LinkTitle extends GDO_String
 	
 	public function renderCell()
 	{
-		return GDO_Template::php('Links', 'cell_link_title.php', ['link'=>$this->gdo, 'field'=>$this])->__toString();
+		return GDT_Template::php('Links', 'cell_link_title.php', ['link'=>$this->gdo, 'field'=>$this])->__toString();
 	}
 }
