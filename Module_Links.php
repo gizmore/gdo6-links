@@ -1,16 +1,16 @@
 <?php
 namespace GDO\Links;
 
-use GDO\Core\Module;
+use GDO\Core\GDO_Module;
 use GDO\Template\GDT_Bar;
 use GDO\Type\GDT_Checkbox;
 use GDO\Type\GDT_Int;
 use GDO\User\GDT_Level;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
-final class Module_Links extends Module
+final class Module_Links extends GDO_Module
 {
-	public function getClasses() { return ['GDO\Links\Link', 'GDO\Links\LinkTag', 'GDO\Links\LinkVote']; }
+	public function getClasses() { return ['GDO\Links\GDO_Link', 'GDO\Links\GDO_LinkTag', 'GDO\Links\GDO_LinkVote']; }
 	public function onLoadLanguage() { return $this->loadLanguage('lang/links'); }
 	
 	##############
@@ -36,13 +36,13 @@ final class Module_Links extends Module
 	public function cfgAddMinLevel() { return $this->getConfigValue('link_add_min_level'); }
 	public function cfgAddPerLevel() { return $this->getConfigValue('link_add_per_level'); }
 	public function cfgVotesBeforeOutcome() { return $this->getConfigValue('link_votes_outcome'); }
-	public function cfgAllowed(User $user)
+	public function cfgAllowed(GDO_User $user)
 	{
 	    if ($user->isAdmin())
 	    {
 	        return 9001;
 	    }
-		$added = Link::table()->countWhere("link_created_by = {$user->getID()} AND link_deleted_at IS NULL");
+		$added = GDO_Link::table()->countWhere("link_created_by = {$user->getID()} AND link_deleted_at IS NULL");
 		$bonus = $this->cfgAddPerLevel() > 0 ? round(max(0, ($user->getLevel() - $this->cfgAddMinLevel()) / $this->cfgAddPerLevel())) : 0;
 		return max(0, $this->cfgAddMin() + $bonus - $added);
 	}

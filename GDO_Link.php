@@ -13,28 +13,28 @@ use GDO\Template\GDT_Template;
 use GDO\Type\GDT_Int;
 use GDO\Type\GDT_Message;
 use GDO\User\GDT_Level;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteCount;
 use GDO\Vote\GDT_VoteRating;
 use GDO\Vote\WithVotes;
 
-final class Link extends GDO
+final class GDO_Link extends GDO
 {
 	############
 	### Tags ###
 	############
 	use WithTags;
-	public function gdoTagTable() { return LinkTag::table(); }
+	public function gdoTagTable() { return GDO_LinkTag::table(); }
 
 	#############
 	### Votes ###
 	#############
 	use WithVotes;
-	public function gdoVoteTable() { return LinkVote::table(); }
+	public function gdoVoteTable() { return GDO_LinkVote::table(); }
 	public function gdoVoteMin() { return 1; }
 	public function gdoVoteMax() { return 5; }
 	public function gdoVotesBeforeOutcome() { return Module_Links::instance()->cfgVotesBeforeOutcome(); }
-	public function gdoVoteAllowed(User $user) { return $user->getLevel() >= $this->getLevel(); }
+	public function gdoVoteAllowed(GDO_User $user) { return $user->getLevel() >= $this->getLevel(); }
 	
 	###########
 	### GDO ###

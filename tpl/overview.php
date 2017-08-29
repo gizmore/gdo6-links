@@ -1,19 +1,19 @@
 <?php
-use GDO\Links\Link;
+use GDO\Links\GDO_Link;
 use GDO\Links\Module_Links;
 use GDO\Table\GDT_List;
 use GDO\Tag\GDT_TagCloud;
 use GDO\UI\GDT_Button;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteSelection;
 
-$user = User::current();
+$user = GDO_User::current();
 
 # Render Navtabs
 echo Module_Links::instance()->renderTabs();
 
 # Query
-$gdo = Link::table();
+$gdo = GDO_Link::table();
 $votes = $gdo->gdoVoteTable();
 $query = $gdo->select('*')->join("LEFT JOIN {$votes->gdoTableIdentifier()} ON vote_object=link_id AND vote_user={$user->getID()}");
 

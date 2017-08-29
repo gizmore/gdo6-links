@@ -1,13 +1,13 @@
 <?php
 use GDO\Date\Time;
-use GDO\Links\Link;
+use GDO\Links\GDO_Link;
 use GDO\UI\GDT_Icon;
 use GDO\UI\GDT_Link;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteSelection;
 
-$link instanceof Link;
-$user = User::current();
+$link instanceof GDO_Link;
+$user = GDO_User::current();
 $creator = $link->getCreator();
 ?>
 <?php

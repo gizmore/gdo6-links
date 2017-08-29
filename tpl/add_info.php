@@ -1,12 +1,12 @@
 <?php
-use GDO\Links\Link;
+use GDO\Links\GDO_Link;
 use GDO\Links\Module_Links;
 use GDO\Template\GDT_Box;
-use GDO\User\User;
+use GDO\User\GDO_User;
 
 $module = Module_Links::instance();
-$links = Link::table();
-$user = User::current();
+$links = GDO_Link::table();
+$user = GDO_User::current();
 $total = $links->countWhere("link_deleted_at IS NULL");
 $added = $links->countWhere("link_created_by = {$user->getID()} AND link_deleted_at IS NULL");
 $link_level = $module->cfgLevels() ? 'link_level' : '0';

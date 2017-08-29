@@ -5,10 +5,9 @@ use GDO\Form\GDT_AntiCSRF;
 use GDO\Form\GDT_Form;
 use GDO\Form\GDT_Submit;
 use GDO\Form\MethodForm;
-use GDO\Links\Link;
+use GDO\Links\GDO_Link;
 use GDO\Links\Module_Links;
-use GDO\User\User;
-use GDO\Tag\GDT_Tag;
+use GDO\User\GDO_User;
 use GDO\Tag\GDT_Tags;
 
 final class Add extends MethodForm
@@ -16,13 +15,13 @@ final class Add extends MethodForm
 	public function isUserRequired() { return true; }
 	
 	/**
-	 * @var Link
+	 * @var GDO_Link
 	 */
 	private $table;
 	
 	public function init()
 	{
-		$this->table = Link::table();
+	    $this->table = GDO_Link::table();
 	}
 	
 	public function createForm(GDT_Form $form)
@@ -49,7 +48,7 @@ final class Add extends MethodForm
 	public function execute()
 	{
 		$response = Module_Links::instance()->renderTabs()->add($this->renderInfoBox());
-		if ($allowed = Module_Links::instance()->cfgAllowed(User::current()))
+		if ($allowed = Module_Links::instance()->cfgAllowed(GDO_User::current()))
 		{
 			$response->add(parent::execute());
 		}
@@ -63,7 +62,7 @@ final class Add extends MethodForm
 	
 	public function formValidated(GDT_Form $form)
 	{
-		$link = Link::blank()->setVars($form->getFormData())->insert();
+	    $link = GDO_Link::blank()->setVars($form->getFormData())->insert();
 		$link->updateTags($form->getField('tags')->getValue());
 		
 		return $this->message('msg_link_added')->add($this->execMethod('Overview'));

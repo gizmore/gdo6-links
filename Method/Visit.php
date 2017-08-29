@@ -2,8 +2,8 @@
 namespace GDO\Links\Method;
 use GDO\Core\Method;
 use GDO\Core\Website;
-use GDO\Links\Link;
-use GDO\User\User;
+use GDO\Links\GDO_Link;
+use GDO\User\GDO_User;
 use GDO\Util\Common;
 /**
  * Increase visit counter and redirect.
@@ -13,8 +13,8 @@ final class Visit extends Method
 {
 	public function execute()
 	{
-		$link = Link::table()->find(Common::getRequestInt('id'));
-		$user = User::current();
+	    $link = GDO_Link::table()->find(Common::getRequestInt('id'));
+		$user = GDO_User::current();
 		$level = $link->getLevel();
 		if ($level > $user->getLevel())
 		{
