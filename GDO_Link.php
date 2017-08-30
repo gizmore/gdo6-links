@@ -17,6 +17,7 @@ use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteCount;
 use GDO\Vote\GDT_VoteRating;
 use GDO\Vote\WithVotes;
+use GDO\DB\Cache;
 
 final class GDO_Link extends GDO
 {
@@ -62,7 +63,7 @@ final class GDO_Link extends GDO
 	### Getter ###
 	##############
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getCreator() { return $this->getValue('link_created_by'); }
 	public function getCreatorID() { return $this->getVar('link_created_by'); }
@@ -83,4 +84,23 @@ final class GDO_Link extends GDO
 	### Render ###
 	##############
 	public function renderList() { return GDT_Template::php('Links', 'listitem/link.php', ['link'=>$this]); }
+	
+	###########
+	### All ###
+	###########
+	public function getCounter()
+	{
+	    if (null === ($count = Cache::get('gdo_link_count')))
+	    {
+	        $count = $this->table()->countWhere();
+	        Cache::set('gdo_link_count', $count);
+	    }
+	    return $count;
+	}
+	
+	public function recacheCounter()
+	{
+	    Cache::unset('gdo_link_count');
+	}
+	
 }

@@ -57,6 +57,6 @@ final class Module_Links extends GDO_Module
 	
 	public function hookLeftBar(GDT_Bar $navbar)
 	{
-		return $this->templatePHP('navbar.php', ['navbar'=>$navbar]);
+		$this->templatePHP('navbar.php', ['navbar'=>$navbar]);
 	}
 }
