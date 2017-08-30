@@ -43,9 +43,9 @@ final class GDO_Link extends GDO
 	{
 		return array(
 			GDT_AutoInc::make('link_id'),
-			GDT_LinkUrl::make('link_url'),
-			GDT_LinkTitle::make('link_title'),
-			GDT_Language::make('link_lang'),
+		    GDT_LinkUrl::make('link_url')->notNull()->reachable(),
+			GDT_LinkTitle::make('link_title')->notNull(),
+		    GDT_Language::make('link_lang')->emptyInitial(t('no_special_language')),
 			GDT_Message::make('link_description')->notNull()->min(3)->max(512)->label('description'),
 			GDT_Level::make('link_level')->notNull()->unsigned()->initial('0'),
 			GDT_Int::make('link_views')->notNull()->unsigned()->initial('0')->label('views'),
