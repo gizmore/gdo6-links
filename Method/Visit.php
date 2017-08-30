@@ -13,7 +13,7 @@ final class Visit extends Method
 {
 	public function execute()
 	{
-	    $link = GDO_Link::table()->find(Common::getRequestInt('id'));
+	    $link = GDO_Link::table()->find(Common::getRequestString('id'));
 		$user = GDO_User::current();
 		$level = $link->getLevel();
 		if ($level > $user->getLevel())
