@@ -64,6 +64,7 @@ final class Add extends MethodForm
 	{
 	    $link = GDO_Link::blank()->setVars($form->getFormData())->insert();
 		$link->updateTags($form->getField('tags')->getValue());
+		GDO_Link::recacheCounter();
 		return $this->message('msg_link_added')->add($this->execMethod('Overview'));
 	}
 }

@@ -88,17 +88,17 @@ final class GDO_Link extends GDO
 	###########
 	### All ###
 	###########
-	public function getCounter()
+	public static function getCounter()
 	{
-	    if (null === ($count = Cache::get('gdo_link_count')))
+	    if (false === ($count = Cache::get('gdo_link_count')))
 	    {
-	        $count = $this->table()->countWhere();
+	        $count = self::table()->countWhere();
 	        Cache::set('gdo_link_count', $count);
 	    }
 	    return $count;
 	}
 	
-	public function recacheCounter()
+	public static function recacheCounter()
 	{
 	    Cache::unset('gdo_link_count');
 	}
