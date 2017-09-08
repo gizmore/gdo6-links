@@ -1,9 +1,12 @@
 <?php
 namespace GDO\Links;
-
 use GDO\Template\GDT_Template;
 use GDO\Type\GDT_String;
-
+/**
+ * Display the title of a link, or the censored message.
+ * A link title has a minlength of 3. 
+ * @author gizmore
+ */
 final class GDT_LinkTitle extends GDT_String
 {
 	public function __construct()
@@ -20,6 +23,6 @@ final class GDT_LinkTitle extends GDT_String
 	
 	public function renderCell()
 	{
-		return GDT_Template::php('Links', 'cell_link_title.php', ['link'=>$this->gdo, 'field'=>$this])->__toString();
+		return GDT_Template::php('Links', 'cell_link_title.php', ['link'=>$this->gdo, 'field'=>$this]);
 	}
 }

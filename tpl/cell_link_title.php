@@ -6,9 +6,9 @@ $user = GDO_User::current();
 $level = $link->getLevel();
 if ($level > $user->getLevel())
 {
-	l('title_link_level', [$level]);
+	echo t('title_link_level', [$level]);
 }
 else
 {
-	$link->edisplay('link_title');
+	echo html($link->getVar('link_title'));
 }

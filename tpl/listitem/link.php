@@ -5,6 +5,10 @@ use GDO\UI\GDT_Icon;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteSelection;
+use GDO\Links\GDT_LinkTitle;
+use GDO\Avatar\GDO_Avatar;
+use GDO\User\GDT_LevelPopup;
+use GDO\UI\GDT_IconButton;
 
 $link instanceof GDO_Link;
 $user = GDO_User::current();
@@ -17,15 +21,18 @@ $age = Time::displayAge($date);
 $views = $link->getViews();
 $votes = $link->getVoteCount();
 $rating = $link->getVoteRating();
-
 ?>
 <md-list-item class="md-3-line">
+  <?= GDO_Avatar::renderAvatar($creator); ?>
   <div class="md-list-item-text" layout="column">
-    <h3><?= GDT_Link::anchor(href('Links', 'Visit', '&id='.$link->getID()), html($link->getTitle())); ?></h3>
-    <h4><?= t('li_link2', [$username, $age]); ?></h4>
-    <span layout="row" flex layout-align="space-around center"><?= t('li_link3', [$link->gdoColumn('link_votes')->renderCell(), GDT_VoteSelection::make()->gdo($link)->renderCell(), $link->gdoColumn('link_rating')->renderCell()]) ?></span>
+    <h3><?= GDT_LinkTitle::make()->gdo($link)->render(); ?></h3>
+    <h4><?= $creator->displayName(); ?></h4>
+    <p>
+      <?= GDT_LevelPopup::make()->level($link->getLevel())->renderCell(); ?>
+    </p>
   </div>
-
-  <?= GDT_Icon::iconS('arrow_right'); ?>
-      
+<?php
+if ($link->canView())
+  GDT_Link::make('link_view')->href($link->href_visit())->renderCell();
+?>
 </md-list-item>
