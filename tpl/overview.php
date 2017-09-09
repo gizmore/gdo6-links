@@ -23,7 +23,7 @@ $cloud->filterQuery($query);
 echo $cloud->render();
 
 # Table
-$table = GDT_List::make()->listMode(GDT_List::MODE_LIST);
+$table = GDT_List::make('links')->listMode(GDT_List::MODE_LIST);
 $table->gdo($gdo);
 $table->href(href('Links', 'Overview'));
 $table->addFields($gdo->getGDOColumns(['link_id', 'link_title', 'link_views', 'link_url', 'link_votes', 'link_rating']));
