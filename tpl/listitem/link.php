@@ -1,15 +1,12 @@
 <?php
 use GDO\Date\Time;
 use GDO\Links\GDO_Link;
-use GDO\UI\GDT_Icon;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
-use GDO\Vote\GDT_VoteSelection;
 use GDO\Links\GDT_LinkTitle;
 use GDO\Avatar\GDO_Avatar;
 use GDO\User\GDT_LevelPopup;
-use GDO\UI\GDT_IconButton;
-
+use GDO\Vote\GDT_VotePopup;
 $link instanceof GDO_Link;
 $user = GDO_User::current();
 $creator = $link->getCreator();
@@ -29,10 +26,8 @@ $rating = $link->getVoteRating();
     <h4><?= $creator->displayName(); ?></h4>
     <p>
       <?= GDT_LevelPopup::make()->level($link->getLevel())->renderCell(); ?>
+      <?= GDT_VotePopup::make()->gdo($link)->renderCell(); ?>
     </p>
   </div>
-<?php
-if ($link->canView())
-  GDT_Link::make('link_view')->href($link->href_visit())->renderCell();
-?>
+  <?= GDT_Link::make('link_view')->href($link->href_visit())->renderCell(); ?>
 </md-list-item>
