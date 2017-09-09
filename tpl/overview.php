@@ -15,7 +15,7 @@ echo Module_Links::instance()->renderTabs();
 # Query
 $gdo = GDO_Link::table();
 $votes = $gdo->gdoVoteTable();
-$query = $gdo->select('gdo_link.*, vote_value as own_vote')->cached(false)->join("LEFT JOIN {$votes->gdoTableIdentifier()} v ON vote_object=link_id AND vote_user={$user->getID()}");
+$query = $gdo->select('gdo_link.*, vote_value as own_vote')->uncached()->join("LEFT JOIN {$votes->gdoTableIdentifier()} v ON vote_object=link_id AND vote_user={$user->getID()}");
 
 # Cloud
 $cloud = GDT_TagCloud::make('cloud')->table($gdo);
@@ -23,8 +23,7 @@ $cloud->filterQuery($query);
 echo $cloud->render();
 
 # Table
-$table = GDT_List::make();
-$table->listMode(GDT_List::MODE_LIST);
+$table = GDT_List::make()->listMode(GDT_List::MODE_LIST);
 $table->gdo($gdo);
 $table->href(href('Links', 'Overview'));
 $table->addFields($gdo->getGDOColumns(['link_id', 'link_title', 'link_views', 'link_url', 'link_votes', 'link_rating']));
