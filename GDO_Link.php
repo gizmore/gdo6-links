@@ -9,9 +9,9 @@ use GDO\DB\GDT_DeletedAt;
 use GDO\Date\GDT_DateTime;
 use GDO\Language\GDT_Language;
 use GDO\Tag\WithTags;
-use GDO\Template\GDT_Template;
-use GDO\Type\GDT_Int;
-use GDO\Type\GDT_Message;
+use GDO\Core\GDT_Template;
+use GDO\DB\GDT_Int;
+use GDO\UI\GDT_Message;
 use GDO\User\GDT_Level;
 use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteCount;
@@ -100,7 +100,7 @@ final class GDO_Link extends GDO
 	
 	public static function recacheCounter()
 	{
-	    Cache::unset('gdo_link_count');
+	    Cache::remove('gdo_link_count');
 	}
 	
 }

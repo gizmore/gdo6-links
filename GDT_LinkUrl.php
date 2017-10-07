@@ -2,7 +2,7 @@
 namespace GDO\Links;
 
 use GDO\Net\GDT_Url;
-use GDO\Template\GDT_Template;
+use GDO\Core\GDT_Template;
 
 final class GDT_LinkUrl extends GDT_Url
 {

@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Links;
-use GDO\Template\GDT_Template;
-use GDO\Type\GDT_String;
+use GDO\Core\GDT_Template;
+use GDO\DB\GDT_String;
 /**
  * Display the title of a link, or the censored message.
  * A link title has a minlength of 3. 

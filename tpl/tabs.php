@@ -1,5 +1,5 @@
 <?php
-use GDO\Template\GDT_Bar;
+use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 $tabs = GDT_Bar::make();
 $tabs->addField(GDT_Link::make('links')->href(href('Links', 'Overview')));
