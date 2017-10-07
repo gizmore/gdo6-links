@@ -52,7 +52,7 @@ final class Module_Links extends GDO_Module
 	#################
 	public function renderTabs()
 	{
-		return $this->templatePHP('tabs.php');
+		return $this->responsePHP('tabs.php');
 	}
 	
 	public function hookLeftBar(GDT_Bar $navbar)

@@ -6,6 +6,7 @@ use GDO\Tag\GDT_TagCloud;
 use GDO\UI\GDT_Button;
 use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteSelection;
+use GDO\Core\GDT_Fields;
 
 $user = GDO_User::current();
 
@@ -26,12 +27,14 @@ echo $cloud->render();
 $table = GDT_List::make('links')->listMode(GDT_List::MODE_LIST);
 $table->gdo($gdo);
 $table->href(href('Links', 'Overview'));
-$table->addFields($gdo->getGDOColumns(['link_id', 'link_title', 'link_views', 'link_url', 'link_votes', 'link_rating']));
-$table->addField(GDT_VoteSelection::make('link_vote'));
-$table->addField(GDT_Button::make('visit'));
+$headers = GDT_Fields::make();
+$headers->addFields($gdo->getGDOColumns(['link_id', 'link_title', 'link_views', 'link_url', 'link_votes', 'link_rating']));
+$headers->addField(GDT_VoteSelection::make('link_vote'));
+$headers->addField(GDT_Button::make('visit'));
+$table->headers($headers);
 $table->paginateDefault();
 $table->filtered();
 $table->ordered();
 $table->query($query);
-$table->label('list_title_links_overview', [sitename(), $table->countItems()]);
-echo $table->renderCell();
+$table->title(t('list_title_links_overview', [sitename(), $table->countItems()]));
+echo $table->render();
