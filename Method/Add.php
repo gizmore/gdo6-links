@@ -29,7 +29,7 @@ final class Add extends MethodForm
 		$table = $this->table;
 		$module = Module_Links::instance();
 
-		$form->addField(GDT_Tags::make('tags'));
+		$form->addField(GDT_Tags::make('tags')->tagtable($this->table->gdoTagTable()));
 		$form->addField($table->gdoColumn('link_lang'));
 		$form->addField($table->gdoColumn('link_title'));
 		$form->addField($table->gdoColumn('link_url'));

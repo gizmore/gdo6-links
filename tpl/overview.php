@@ -11,7 +11,7 @@ use GDO\Core\GDT_Fields;
 $user = GDO_User::current();
 
 # Render Navtabs
-echo Module_Links::instance()->renderTabs();
+echo Module_Links::instance()->renderTabs()->render();
 
 # Query
 $gdo = GDO_Link::table();
