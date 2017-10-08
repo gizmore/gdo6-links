@@ -9,6 +9,7 @@ use GDO\Links\GDO_Link;
 use GDO\Links\Module_Links;
 use GDO\User\GDO_User;
 use GDO\Tag\GDT_Tags;
+use GDO\Core\Website;
 
 final class Add extends MethodForm
 {
@@ -65,6 +66,6 @@ final class Add extends MethodForm
 	    $link = GDO_Link::blank()->setVars($form->getFormData())->insert();
 		$link->updateTags($form->getField('tags')->getValue());
 		GDO_Link::recacheCounter();
-		return $this->message('msg_link_added')->add($this->execMethod('Overview'));
+		return $this->message('msg_link_added')->add(Website::redirectMessage(href('Links', 'Overview')));
 	}
 }
