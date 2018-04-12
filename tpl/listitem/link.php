@@ -27,7 +27,7 @@ $li->title(GDT_LinkTitle::make()->gdo($link));
 $li->subtitle(GDT_Container::make()->addFields([GDT_VoteRating::make()->gdo($link), GDT_VoteSelection::make()->gdo($link)]));
 $li->subtext($link->gdoColumn('link_description'));
 $li->actions()->addFields(array(
-	GDT_Button::make('link_view')->href($link->href_visit())->icon('view'),
+	GDT_Button::make('btn_view')->href($link->href_visit())->icon('view'),
 ));
 
 echo $li->render();
