@@ -1,7 +1,7 @@
 <?php
 namespace GDO\Links\Method;
 
-use GDO\Core\MethodCronjob;
+use GDO\Cronjob\MethodCronjob;
 
 final class Cronjob extends MethodCronjob
 {
