@@ -10,6 +10,7 @@ use GDO\User\GDO_User;
 
 final class Module_Links extends GDO_Module
 {
+	public function getDependencies() { return ['Vote', 'Tag', 'Cronjob']; }
 	public function getClasses() { return ['GDO\Links\GDO_Link', 'GDO\Links\GDO_LinkTag', 'GDO\Links\GDO_LinkVote']; }
 	public function onLoadLanguage() { return $this->loadLanguage('lang/links'); }
 	
