@@ -36,5 +36,5 @@ $table->paginateDefault();
 $table->filtered();
 $table->ordered();
 $table->query($query);
-$table->title(t('list_title_links_overview', [sitename(), $table->countItems()]));
+$table->title(t('list_title_links_overview', [$table->countItems()]));
 echo $table->render();
