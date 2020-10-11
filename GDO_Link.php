@@ -10,7 +10,6 @@ use GDO\Date\GDT_DateTime;
 use GDO\Language\GDT_Language;
 use GDO\Tag\WithTags;
 use GDO\Core\GDT_Template;
-use GDO\UI\GDT_Message;
 use GDO\User\GDT_Level;
 use GDO\User\GDO_User;
 use GDO\Vote\GDT_VoteCount;
@@ -44,14 +43,14 @@ final class GDO_Link extends GDO
 		    GDT_LinkUrl::make('link_url'),
 			GDT_LinkTitle::make('link_title'),
 		    GDT_Language::make('link_lang')->emptyInitial(t('no_special_language')),
-			GDT_Message::make('link_description')->notNull()->min(3)->max(512)->label('description'),
+			GDT_LinkDescription::make('link_description'),
 			GDT_Level::make('link_level')->notNull()->initial('0'),
 			GDT_UInt::make('link_views')->notNull()->initial('0')->label('views'),
-			GDT_VoteRating::make('link_rating'),
-			GDT_VoteCount::make('link_votes'),
+			GDT_VoteRating::make('link_rating')->orderableField(),
+			GDT_VoteCount::make('link_votes')->orderableField(),
 			GDT_DateTime::make('link_checked_at'),
-			GDT_CreatedBy::make('link_created_by'),
-			GDT_CreatedAt::make('link_created_at'),
+			GDT_CreatedBy::make('link_created_by')->filterable(),
+			GDT_CreatedAt::make('link_created_at')->orderableField(),
 			GDT_DeletedAt::make('link_deleted_at'),
 		);
 	}
@@ -69,6 +68,7 @@ final class GDO_Link extends GDO
 	public function getID() { return $this->getVar('link_id'); }
 	public function getURL() { return $this->getVar('link_url'); }
 	public function getTitle() { return $this->getVar('link_title'); }
+	public function getDescription() { return $this->getVar('link_description'); }
 	public function getLevel() { return $this->getVar('link_level'); }
 	public function getViews() { return $this->getVar('link_views'); }
 	
@@ -77,6 +77,8 @@ final class GDO_Link extends GDO
 	    $user = $user === null ? GDO_User::current() : $user;
 	    return $user->getLevel() >= $this->getLevel();
 	}
+	
+	public function displayDescription() { return $this->getDescription(); }
 	
 	############
 	### HREF ###

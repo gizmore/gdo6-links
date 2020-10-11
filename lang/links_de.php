@@ -1,6 +1,8 @@
 <?php
 return array(
 'link_links' => '%d Links',
+'link_views' => '%d Views',
+'views' => 'Views',
 #####
 'no_special_language' => 'Keine Sprache erforderlich',
 'list_title_links_overview' => '%s Links',
