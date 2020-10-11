@@ -30,7 +30,13 @@ $table->href(href('Links', 'Overview'));
 $headers = GDT_Fields::make();
 $headers->addFields($gdo->getGDOColumns(['link_id', 'link_title', 'link_views', 'link_url', 'link_votes', 'link_rating']));
 $headers->addField(GDT_VoteSelection::make('link_vote'));
-$headers->addField(GDT_Button::make('visit'));
+$checkEnabled = function(GDT_Button $button)
+{
+    /** @var GDO_Link $link **/
+    $link = $button->gdo;
+    return $link->canView();
+};
+$headers->addField(GDT_Button::make('visit')->checkEnabled($checkEnabled));
 $table->headers($headers);
 $table->paginateDefault();
 $table->filtered();

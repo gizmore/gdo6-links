@@ -1,7 +1,8 @@
 <?php
 return array(
 'link_links' => '%d Links',
-    #####
+#####
+'no_special_language' => 'Keine Sprache erforderlich',
 'list_title_links_overview' => '%s Links',
 'title_link_level' => 'Sie brauchen einen Nutzerlevel von %s um diesen Link zu sehen.',
 ####
@@ -13,4 +14,16 @@ return array(
 ####
 'li_link2' => 'Hinzugefügt von %s, vor %s',
 'li_link3' => '%s %s %s',
+####
+'cfg_cfg_links_meta' => 'Metadaten',
+'cfg_link_descriptions' => 'Link-Beschreibung ermöglichen?',
+'cfg_link_visible_levels' => 'Level-Engine verwenden?',
+'cfg_cfg_links_scoring' => 'Scoring',
+'cfg_link_add_min' => 'Ein user kann mindestens N links hinzufügen',
+'cfg_link_add_max' => 'Ein user kann maximal N links hinzufügen',
+'cfg_link_add_min_level' => 'Minimum Level für mehr Links',
+'cfg_link_add_per_level' => 'Level für einen zusätzlichen Link',
+'cfg_cfg_links_votes' => 'Voting',
+'cfg_link_votes_outcome' => 'Anzahl votes bis voting erscheint',
+'cfg_link_guest_votes' => 'Gast-Votes erlauben?',
 );

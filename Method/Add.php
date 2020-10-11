@@ -31,7 +31,7 @@ final class Add extends MethodForm
 		$module = Module_Links::instance();
 
 		$form->addField(GDT_Tags::make('tags')->tagtable($this->table->gdoTagTable()));
-		$form->addField($table->gdoColumn('link_lang'));
+		$form->addField($table->gdoColumn('link_lang')->initial(GWF_LANGUAGE));
 		$form->addField($table->gdoColumn('link_title'));
 		$form->addField($table->gdoColumn('link_url'));
 		if ($module->cfgDescriptions())
@@ -40,7 +40,7 @@ final class Add extends MethodForm
 		}
 		if ($module->cfgLevels())
 		{
-			$form->addField($table->gdoColumn('link_level'));
+			$form->addField($table->gdoColumn('link_level')->initial('0'));
 		}
 		$form->addField(GDT_Submit::make());
 		$form->addField(GDT_AntiCSRF::make());
@@ -49,7 +49,7 @@ final class Add extends MethodForm
 	public function execute()
 	{
 		$response = Module_Links::instance()->renderTabs()->add($this->renderInfoBox());
-		if ($allowed = Module_Links::instance()->cfgAllowed(GDO_User::current()))
+		if (Module_Links::instance()->cfgAllowed(GDO_User::current()))
 		{
 			$response->add(parent::execute());
 		}

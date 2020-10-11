@@ -1,7 +1,8 @@
 <?php
 return array(
 'link_links' => '%d Links',
-    #####
+#####
+'no_special_language' => 'No special language',
 'list_title_links_overview' => '%s Links',
 'title_link_level' => 'You need a userlevel of %s to see this link.',
 ####
@@ -13,4 +14,14 @@ return array(
 ####
 'li_link2' => 'Added by %s, %s ago',
 'li_link3' => '%s %s %s',
+    
+####
+'cfg_link_descriptions' => 'Link-Beschreibung ermöglichen?',
+'cfg_link_visible_levels' => 'Level-Engine verwenden?',
+'cfg_link_add_min' => 'Ein user kann mindestens N links hinzufügen',
+'cfg_link_add_max' => 'Ein user kann maximal N links hinzufügen',
+'cfg_link_add_min_level' => 'Minimum Level für mehr Links',
+'cfg_link_add_per_level' => 'Level für einen zusätzlichen Link',
+'cfg_link_votes_outcome' => 'Anzahl votes bis voting erscheint',
+    
 );

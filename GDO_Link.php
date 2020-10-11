@@ -10,7 +10,6 @@ use GDO\Date\GDT_DateTime;
 use GDO\Language\GDT_Language;
 use GDO\Tag\WithTags;
 use GDO\Core\GDT_Template;
-use GDO\DB\GDT_Int;
 use GDO\UI\GDT_Message;
 use GDO\User\GDT_Level;
 use GDO\User\GDO_User;
@@ -18,6 +17,7 @@ use GDO\Vote\GDT_VoteCount;
 use GDO\Vote\GDT_VoteRating;
 use GDO\Vote\WithVotes;
 use GDO\DB\Cache;
+use GDO\DB\GDT_UInt;
 
 final class GDO_Link extends GDO
 {
@@ -32,9 +32,6 @@ final class GDO_Link extends GDO
 	#############
 	use WithVotes;
 	public function gdoVoteTable() { return GDO_LinkVote::table(); }
-	public function gdoVoteMin() { return 1; }
-	public function gdoVoteMax() { return 5; }
-	public function gdoVotesBeforeOutcome() { return Module_Links::instance()->cfgVotesBeforeOutcome(); }
 	public function gdoVoteAllowed(GDO_User $user) { return $user->getLevel() >= $this->getLevel(); }
 	
 	###########
@@ -44,12 +41,12 @@ final class GDO_Link extends GDO
 	{
 		return array(
 			GDT_AutoInc::make('link_id'),
-		    GDT_LinkUrl::make('link_url')->notNull()->reachable(),
-			GDT_LinkTitle::make('link_title')->notNull(),
+		    GDT_LinkUrl::make('link_url'),
+			GDT_LinkTitle::make('link_title'),
 		    GDT_Language::make('link_lang')->emptyInitial(t('no_special_language')),
 			GDT_Message::make('link_description')->notNull()->min(3)->max(512)->label('description'),
-			GDT_Level::make('link_level')->notNull()->unsigned()->initial('0'),
-			GDT_Int::make('link_views')->notNull()->unsigned()->initial('0')->label('views'),
+			GDT_Level::make('link_level')->notNull()->initial('0'),
+			GDT_UInt::make('link_views')->notNull()->initial('0')->label('views'),
 			GDT_VoteRating::make('link_rating'),
 			GDT_VoteCount::make('link_votes'),
 			GDT_DateTime::make('link_checked_at'),
@@ -74,6 +71,12 @@ final class GDO_Link extends GDO
 	public function getTitle() { return $this->getVar('link_title'); }
 	public function getLevel() { return $this->getVar('link_level'); }
 	public function getViews() { return $this->getVar('link_views'); }
+	
+	public function canView(GDO_User $user=null)
+	{
+	    $user = $user === null ? GDO_User::current() : $user;
+	    return $user->getLevel() >= $this->getLevel();
+	}
 	
 	############
 	### HREF ###
