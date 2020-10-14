@@ -46,11 +46,11 @@ final class GDO_Link extends GDO
 			GDT_LinkDescription::make('link_description'),
 			GDT_Level::make('link_level')->notNull()->initial('0'),
 			GDT_UInt::make('link_views')->notNull()->initial('0')->label('views'),
-			GDT_VoteRating::make('link_rating')->orderableField(),
-			GDT_VoteCount::make('link_votes')->orderableField(),
+			GDT_VoteRating::make('link_rating'),
+			GDT_VoteCount::make('link_votes'),
 			GDT_DateTime::make('link_checked_at'),
-			GDT_CreatedBy::make('link_created_by')->filterable(),
-			GDT_CreatedAt::make('link_created_at')->orderableField(),
+			GDT_CreatedBy::make('link_created_by'),
+			GDT_CreatedAt::make('link_created_at'),
 			GDT_DeletedAt::make('link_deleted_at'),
 		);
 	}

@@ -1,7 +1,7 @@
 <?php
 use GDO\Links\GDO_Link;
 use GDO\User\GDO_User;
-$link instanceof GDO_Link;
+/** @var $link GDO_Link **/
 $user = GDO_User::current();
 $level = $link->getLevel();
 if ($level > $user->getLevel())

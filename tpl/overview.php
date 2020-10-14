@@ -27,7 +27,7 @@ echo $cloud->render();
 $table = GDT_List::make('links')->listMode(GDT_List::MODE_LIST);
 $table->gdo($gdo);
 $table->href(href('Links', 'Overview'));
-$headers = GDT_Fields::make('s');
+$headers = GDT_Fields::make('o');
 $headers->addFields($gdo->getGDOColumns([
     'link_title', 'link_description',
     'link_views', 'link_votes', 'link_rating',
