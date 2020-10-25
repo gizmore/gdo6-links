@@ -16,7 +16,7 @@ $gdo = GDO_Link::table();
 $votes = $gdo->gdoVoteTable();
 $query = $gdo->select('gdo_link.*, cb.user_name, vote_value as own_vote')->uncached()->
 join("LEFT JOIN {$votes->gdoTableIdentifier()} v ON vote_object=link_id AND vote_user={$user->getID()}")->
-join("JOIN gdo_user cb ON cb.user_id = gdo_link.link_created_by");
+join("LEFT JOIN gdo_user cb ON cb.user_id = gdo_link.link_created_by");
 
 # Cloud
 $cloud = GDT_TagCloud::make('cloud')->table($gdo);
@@ -34,11 +34,12 @@ $headers->addFields($gdo->getGDOColumns([
     'link_created_at', 'link_created_by',
 ]));
 
+$table->query($query);
+$table->countQuery($query->copy()->selectOnly('COUNT(*)'));
 $table->headers($headers);
 $table->paginateDefault();
 $table->filtered();
 $table->ordered(true, 'link_rating', false);
 $table->searchable();
-$table->query($query);
 $table->title(t('list_title_links_overview', [$table->countItems()]));
 echo $table->render();
