@@ -33,12 +33,11 @@ $headers->addFields($gdo->getGDOColumns([
     'link_views', 'link_votes', 'link_rating',
     'link_created_at', 'link_created_by',
 ]));
-
+$table->headers($headers);
 $table->query($query);
 $table->countQuery($query->copy()->selectOnly('COUNT(*)'));
-$table->headers($headers);
 $table->paginateDefault();
-$table->filtered();
+// $table->filtered();
 $table->ordered(true, 'link_rating', false);
 $table->searchable();
 $table->title(t('list_title_links_overview', [$table->countItems()]));
