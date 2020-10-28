@@ -9,7 +9,7 @@ use GDO\UI\GDT_Badge;
 
 $li = GDT_ListItem::make()->gdo($link);
 
-$li->titleCreation($link->gdoColumn('link_title'));
+$li->creatorHeader($link->gdoColumn('link_title'));
 $li->content($link->gdoColumn('link_description'));
 
 $li->subtext(GDT_Container::make()->addFields([
