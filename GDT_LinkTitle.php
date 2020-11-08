@@ -15,7 +15,7 @@ final class GDT_LinkTitle extends GDT_Title
 
 	public function __construct()
 	{
-	    parent::__construct();
+// 	    parent::__construct();
 		$this->min = 3;
 		$this->max = 128;
 		$this->notNull();
