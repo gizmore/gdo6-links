@@ -2,17 +2,24 @@
 namespace GDO\Links;
 
 use GDO\Core\GDO_Module;
-use GDO\UI\GDT_Bar;
+use GDO\UI\GDT_Link;
 use GDO\DB\GDT_Checkbox;
 use GDO\User\GDT_Level;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Divider;
 use GDO\DB\GDT_UInt;
+use GDO\UI\GDT_Page;
 
+/**
+ * Links overview tagging and voting.
+ * @author gizmore
+ * @version 6.10
+ * @since 6.05
+ */
 final class Module_Links extends GDO_Module
 {
 	public function getDependencies() { return ['Vote', 'Tag', 'Cronjob']; }
-	public function getClasses() { return ['GDO\Links\GDO_Link', 'GDO\Links\GDO_LinkTag', 'GDO\Links\GDO_LinkVote']; }
+	public function getClasses() { return [GDO_Link::class, GDO_LinkTag::class, GDO_LinkVote::class]; }
 	public function onLoadLanguage() { return $this->loadLanguage('lang/links'); }
 	
 	##############
@@ -32,11 +39,11 @@ final class Module_Links extends GDO_Module
 		    GDT_Divider::make('cfg_links_votes'),
 		    GDT_Checkbox::make('link_guest_votes')->initial('1'),
 		    GDT_UInt::make('link_votes_outcome')->initial('3'),
+		    GDT_Checkbox::make('link_left_bar')->initial('1'),
 		);
 	}
 	public function cfgLevels() { return $this->getConfigValue('link_visible_levels'); }
 	public function cfgDescriptions() { return $this->getConfigValue('link_descriptions'); }
-	
 	public function cfgAddMin() { return $this->getConfigValue('link_add_min'); }
 	public function cfgAddMax() { return $this->getConfigValue('link_add_max'); }
 	public function cfgAddMinLevel() { return $this->getConfigValue('link_add_min_level'); }
@@ -49,6 +56,7 @@ final class Module_Links extends GDO_Module
 		$bonus = $this->cfgAddPerLevel() > 0 ? round(max(0, ($user->getLevel() - $this->cfgAddMinLevel()) / $this->cfgAddPerLevel())) : 0;
 		return max(0, $this->cfgAddMin() + $bonus - $added);
 	}
+	public function cfgLeftBar() { return $this->getConfigValue('link_left_bar'); }
 
 	#################
 	### Templates ###
@@ -58,8 +66,17 @@ final class Module_Links extends GDO_Module
 		return $this->responsePHP('tabs.php');
 	}
 	
-	public function hookLeftBar(GDT_Bar $navbar)
+	############
+	### Init ###
+	############
+	public function onInitSidebar()
 	{
-		$this->templatePHP('navbar.php', ['navbar'=>$navbar]);
+// 	    if ($this->cfgLeftBar())
+	    {
+	        $count = GDO_Link::table()->getCounter();
+	        $navbar = GDT_Page::$INSTANCE->leftNav;
+	        $navbar->addField(GDT_Link::make()->label('link_links', [$count])->href(href('Links', 'Overview')));
+	    }
 	}
+	
 }
