@@ -8,7 +8,7 @@ final class GDT_LinkUrl extends GDT_Url
 {
 	public function __construct()
 	{
-	    parent::__construct();
+// 	    parent::__construct();
 		$this->reachable = true;
 		$this->allowLocal = true;
 		$this->notNull();
