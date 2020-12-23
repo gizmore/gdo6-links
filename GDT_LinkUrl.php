@@ -6,7 +6,7 @@ use GDO\Core\GDT_Template;
 
 final class GDT_LinkUrl extends GDT_Url
 {
-	public function __construct()
+	protected function __construct()
 	{
 // 	    parent::__construct();
 		$this->reachable = true;

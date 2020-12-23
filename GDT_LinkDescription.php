@@ -13,7 +13,7 @@ final class GDT_LinkDescription extends GDT_Message
 {
 	public function defaultLabel() { return $this->label('description'); }
 
-	public function __construct()
+	protected function __construct()
 	{
 // 	    parent::__construct();
 		$this->min = 3;

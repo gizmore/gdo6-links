@@ -13,7 +13,7 @@ final class GDT_LinkTitle extends GDT_Title
 {
 	public function defaultLabel() { return $this->label('title'); }
 
-	public function __construct()
+	protected function __construct()
 	{
 // 	    parent::__construct();
 		$this->min = 3;
