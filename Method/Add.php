@@ -42,7 +42,7 @@ final class Add extends MethodForm
 		{
 			$form->addField($table->gdoColumn('link_level')->initial('0'));
 		}
-		$form->addField(GDT_Submit::make());
+		$form->actions()->addField(GDT_Submit::make());
 		$form->addField(GDT_AntiCSRF::make());
 	}
 	
