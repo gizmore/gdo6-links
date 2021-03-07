@@ -4,7 +4,6 @@ use GDO\Links\Module_Links;
 use GDO\Table\GDT_List;
 use GDO\Tag\GDT_TagCloud;
 use GDO\User\GDO_User;
-use GDO\Core\GDT_Fields;
 
 $user = GDO_User::current();
 
@@ -27,18 +26,16 @@ echo $cloud->render();
 $table = GDT_List::make('links')->listMode(GDT_List::MODE_LIST);
 $table->gdo($gdo);
 $table->href(href('Links', 'Overview'));
-$headers = GDT_Fields::make('o');
-$headers->addFields($gdo->getGDOColumns([
+$table->setupHeaders(true, true, true, false, false);
+$table->addFields($gdo->getGDOColumns([
     'link_title', 'link_description',
     'link_views', 'link_votes', 'link_rating',
     'link_created_at', 'link_created_by',
 ]));
-$table->headers($headers);
 $table->query($query);
 $table->countQuery($query->copy()->selectOnly('COUNT(*)'));
 $table->paginateDefault();
-// $table->filtered();
 $table->ordered(true, 'link_rating', false);
-$table->searchable();
-$table->title(t('list_title_links_overview', [$table->countItems()]));
+$table->searched();
+$table->title('list_title_links_overview', [$table->countItems()]);
 echo $table->render();
