@@ -38,7 +38,7 @@ final class GDO_Link extends GDO
 	###########
 	public function gdoColumns()
 	{
-		return array(
+		return [
 			GDT_AutoInc::make('link_id'),
 		    GDT_LinkUrl::make('link_url'),
 			GDT_LinkTitle::make('link_title'),
@@ -52,7 +52,7 @@ final class GDO_Link extends GDO
 			GDT_CreatedBy::make('link_created_by'),
 			GDT_CreatedAt::make('link_created_at'),
 			GDT_DeletedAt::make('link_deleted_at'),
-		);
+		];
 	}
 
 	##############

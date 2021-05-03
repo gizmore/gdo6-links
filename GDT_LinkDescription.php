@@ -15,7 +15,7 @@ final class GDT_LinkDescription extends GDT_Message
 
 	protected function __construct()
 	{
-// 	    parent::__construct();
+	    parent::__construct();
 		$this->min = 3;
 		$this->max = 512;
 	}

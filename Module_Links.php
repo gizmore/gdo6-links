@@ -13,8 +13,8 @@ use GDO\UI\GDT_Page;
 /**
  * Links overview tagging and voting.
  * @author gizmore
- * @version 6.10
- * @since 6.05
+ * @version 6.10.1
+ * @since 3.1.0
  */
 final class Module_Links extends GDO_Module
 {
@@ -27,7 +27,7 @@ final class Module_Links extends GDO_Module
 	##############
 	public function getConfig()
 	{
-		return array(
+		return [
 		    GDT_Divider::make('cfg_links_meta'),
 		    GDT_Checkbox::make('link_descriptions')->initial('1'),
 			GDT_Checkbox::make('link_visible_levels')->initial('1'),
@@ -40,7 +40,7 @@ final class Module_Links extends GDO_Module
 		    GDT_Checkbox::make('link_guest_votes')->initial('1'),
 		    GDT_UInt::make('link_votes_outcome')->initial('3'),
 		    GDT_Checkbox::make('link_left_bar')->initial('1'),
-		);
+		];
 	}
 	public function cfgLevels() { return $this->getConfigValue('link_visible_levels'); }
 	public function cfgDescriptions() { return $this->getConfigValue('link_descriptions'); }
@@ -71,7 +71,7 @@ final class Module_Links extends GDO_Module
 	############
 	public function onInitSidebar()
 	{
-// 	    if ($this->cfgLeftBar())
+	    if ($this->cfgLeftBar())
 	    {
 	        $count = GDO_Link::table()->getCounter();
 	        $navbar = GDT_Page::$INSTANCE->leftNav;
