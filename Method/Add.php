@@ -48,10 +48,10 @@ final class Add extends MethodForm
 	
 	public function execute()
 	{
-		$response = Module_Links::instance()->renderTabs()->add($this->renderInfoBox());
+		$response = Module_Links::instance()->renderTabs()->addField($this->renderInfoBox());
 		if (Module_Links::instance()->cfgAllowed(GDO_User::current()))
 		{
-			$response->add(parent::execute());
+			$response->addField(parent::execute());
 		}
 		return $response;
 	}
@@ -66,6 +66,6 @@ final class Add extends MethodForm
 	    $link = GDO_Link::blank()->setVars($form->getFormData())->insert();
 		$link->updateTags($form->getField('tags')->getValue());
 		GDO_Link::recacheCounter();
-		return $this->message('msg_link_added')->add(Website::redirectMessage(href('Links', 'Overview')));
+		return $this->message('msg_link_added')->addField(Website::redirectMessage(href('Links', 'Overview')));
 	}
 }

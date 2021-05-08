@@ -18,7 +18,7 @@ final class Visit extends Method
 		$level = $link->getLevel();
 		if ($level > $user->getLevel())
 		{
-			return $this->error('err_link_level', [$level])->add(Website::redirectBack(5));
+			return $this->error('err_link_level', [$level])->addField(Website::redirectBack(5));
 		}
 		
 		$link->increase('link_views');
