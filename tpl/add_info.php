@@ -20,4 +20,4 @@ $info = array(
 	$user->getLevel(),
 	$module->cfgAllowed($user),
 );
-echo GDT_Panel::make()->html(t('box_content_links_add', $info))->renderCell();
+echo GDT_Panel::make()->text('box_content_links_add', $info)->renderCell();

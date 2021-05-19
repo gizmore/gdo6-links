@@ -4,11 +4,9 @@ use GDO\Links\Module_Links;
 use GDO\Table\GDT_List;
 use GDO\Tag\GDT_TagCloud;
 use GDO\User\GDO_User;
+use GDO\Core\Debug;
 
 $user = GDO_User::current();
-
-# Render Navtabs
-echo Module_Links::instance()->renderTabs()->render();
 
 # Query
 $gdo = GDO_Link::table();
@@ -19,7 +17,7 @@ join("LEFT JOIN gdo_user cb ON cb.user_id = gdo_link.link_created_by");
 
 # Cloud
 $cloud = GDT_TagCloud::make('cloud')->table($gdo);
-$cloud->filterQuery($query);
+$cloud->filterQuery($query, 'f');
 echo $cloud->render();
 
 # Table

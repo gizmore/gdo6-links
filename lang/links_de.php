@@ -14,6 +14,7 @@ return array(
 'err_link_level' => 'Sie brauchen einen Nutzerlevel von %s um diesen Link zu sehen.',
 'msg_link_added' => 'Vielen Dank. Ihr Link wurde der Datenbank hinzugefügt.',
 ####
+'mtitle_links_overview' => 'Links',
 'li_link2' => 'Hinzugefügt von %s, vor %s',
 'li_link3' => '%s %s %s',
 ####

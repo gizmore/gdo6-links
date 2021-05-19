@@ -10,6 +10,7 @@ use GDO\Links\Module_Links;
 use GDO\User\GDO_User;
 use GDO\Tag\GDT_Tags;
 use GDO\Core\Website;
+use GDO\Core\GDT_Response;
 
 final class Add extends MethodForm
 {
@@ -46,9 +47,14 @@ final class Add extends MethodForm
 		$form->addField(GDT_AntiCSRF::make());
 	}
 	
+	public function beforeExecute()
+	{
+	    Module_Links::instance()->renderTabs();
+	}
+	
 	public function execute()
 	{
-		$response = Module_Links::instance()->renderTabs()->addField($this->renderInfoBox());
+		$response = GDT_Response::makeWith($this->renderInfoBox());
 		if (Module_Links::instance()->cfgAllowed(GDO_User::current()))
 		{
 			$response->addField(parent::execute());
@@ -66,6 +72,7 @@ final class Add extends MethodForm
 	    $link = GDO_Link::blank()->setVars($form->getFormData())->insert();
 		$link->updateTags($form->getField('tags')->getValue());
 		GDO_Link::recacheCounter();
-		return $this->message('msg_link_added')->addField(Website::redirectMessage(href('Links', 'Overview')));
+		$href = href('Links', 'Overview');
+		return Website::redirectMessage('msg_link_added', null, $href);
 	}
 }

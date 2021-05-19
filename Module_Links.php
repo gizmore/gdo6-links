@@ -13,7 +13,7 @@ use GDO\UI\GDT_Page;
 /**
  * Links overview tagging and voting.
  * @author gizmore
- * @version 6.10.1
+ * @version 6.10.3
  * @since 3.1.0
  */
 final class Module_Links extends GDO_Module
@@ -52,6 +52,7 @@ final class Module_Links extends GDO_Module
 	public function cfgGuestVotes() { return $this->getConfigValue('link_guest_votes'); }
 	public function cfgAllowed(GDO_User $user)
 	{
+	    if ($user->isAdmin()) { return 1000; }
 		$added = GDO_Link::table()->countWhere("link_created_by = {$user->getID()} AND link_deleted_at IS NULL");
 		$bonus = $this->cfgAddPerLevel() > 0 ? round(max(0, ($user->getLevel() - $this->cfgAddMinLevel()) / $this->cfgAddPerLevel())) : 0;
 		return max(0, $this->cfgAddMin() + $bonus - $added);
@@ -63,7 +64,8 @@ final class Module_Links extends GDO_Module
 	#################
 	public function renderTabs()
 	{
-		return $this->responsePHP('tabs.php');
+		GDT_Page::$INSTANCE->topTabs->addField(
+		    $this->templatePHP('tabs.php'));
 	}
 	
 	############
@@ -75,7 +77,8 @@ final class Module_Links extends GDO_Module
 	    {
 	        $count = GDO_Link::table()->getCounter();
 	        $navbar = GDT_Page::$INSTANCE->leftNav;
-	        $navbar->addField(GDT_Link::make()->label('link_links', [$count])->href(href('Links', 'Overview')));
+	        $navbar->addField(GDT_Link::make()->label('link_links', [$count])->
+	            href(href('Links', 'Overview')));
 	    }
 	}
 	

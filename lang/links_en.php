@@ -14,6 +14,7 @@ return array(
 'err_link_level' => 'You need a userlevel of %s to see this link.',
 'msg_link_added' => 'Thank you. Your link has been added to the database.',
 ####
+'mtitle_links_overview' => 'Links',
 'li_link2' => 'Added by %s, %s ago',
 'li_link3' => '%s %s %s',
     
