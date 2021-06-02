@@ -16,22 +16,12 @@ final class Add extends MethodForm
 {
 	public function isUserRequired() { return true; }
 	
-	/**
-	 * @var GDO_Link
-	 */
-	private $table;
-	
-	public function init()
-	{
-	    $this->table = GDO_Link::table();
-	}
-	
 	public function createForm(GDT_Form $form)
 	{
-		$table = $this->table;
+	    $table = GDO_Link::table();
 		$module = Module_Links::instance();
 
-		$form->addField(GDT_Tags::make('tags')->tagtable($this->table->gdoTagTable()));
+		$form->addField(GDT_Tags::make('tags')->tagtable($table->gdoTagTable()));
 		$form->addField($table->gdoColumn('link_lang')->initial(GDO_LANGUAGE));
 		$form->addField($table->gdoColumn('link_title'));
 		$form->addField($table->gdoColumn('link_url'));
